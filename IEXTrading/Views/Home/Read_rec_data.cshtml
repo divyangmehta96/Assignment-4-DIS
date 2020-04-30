@@ -1,0 +1,87 @@
+﻿@model IEnumerable<IEXTrading.Models.Rec>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/css/index.css" />
+    <script type="text/javascript" src="~/js/Chart.min.js"></script>
+    <script type="text/javascript" src="~/lib/chartjs-plugin-annotation-master/chartjs-plugin-annotation.min.js"></script>
+    <script type="text/javascript" src="~/js/site.js"></script>
+</head>
+<body>
+    <div>
+        <h1 class="home_about_dataset" align="center">Statistics on Deaths due to drugs</h1>
+    </div>
+    <div class="summary_table" style="overflow-x:auto;">
+        <table>
+            <tr>
+                <th>Age</th>
+                <th>Sex</th>
+                <th>Race</th>
+                <th>Location</th>
+                <th>Injury Description</th>
+                <th>Cause of Death</th>
+            </tr>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td> @Html.DisplayFor(modelItem => item.age) </td>
+                        <td> @Html.DisplayFor(modelItem => item.sex) </td>
+                        <td> @Html.DisplayFor(modelItem => item.race) </td>
+                        <td> @Html.DisplayFor(modelItem => item.location) </td>
+                        <td> @Html.DisplayFor(modelItem => item.descriptionofinjury) </td>
+                        <td> @Html.DisplayFor(modelItem => item.cod) </td>
+                    </tr>
+                }
+               
+            </tbody>
+        </table>
+        <script>
+            alertDbSave(@ViewBag.dbSuccessComp);
+        </script>
+    </div>
+    <br><br>
+    <div class="pie_div">
+        <canvas class="pie" id="pie-chart" width="800" height="200"></canvas>
+    </div>
+    <script>
+        new Chart(document.getElementById("pie-chart"), {
+            type: 'pie',
+            responsive: true,
+            data: {
+                labels: ["White", "Asians", "Black", "Hispanic", "Unknown"],
+                datasets: [{
+                    label: "Number of Entries in the Dataset",
+                    backgroundColor: ["#998ec3", "#f1a340", "#66c2a5", "#fc9272", "#1D7A46"],
+                    borderColor: ["#998ec3", "#f1a340", "#66c2a5", "#fc9272", "#1D7A46"],
+                    data: [2709, 251, 657, 785, 700]
+                }]
+            },
+            options: { title: { display: true, text: '' } }
+        });
+
+    </script>
+    <script language="JavaScript">
+        function displayLineChart() {
+            var data = {
+                labels: ['Asians', 'Hispanic', 'Black', 'White', 'Unknown'],
+                datasets: [
+                    {
+                        fillColor: "rgba(0,200,255,0.5)",
+                        strokeColor: "rgba(0,200,25s5,1)",
+                        pointColor: "rgba(220,220,220,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(220,220,220,1)",
+                        data: [251, 785, 657, 2709, 700]
+                    }
+                ]
+            };
+            var ctx = document.getElementById("lineChart").getContext("2d");
+            var options = {};
+            var lineChart = new Chart(ctx).Bar(data, options);
+        }
+    </script>
+</body>
+</html>

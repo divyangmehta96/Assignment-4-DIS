@@ -1,0 +1,90 @@
+﻿@model Dictionary<string, int>
+@{
+    ViewData["Title"] = "Refresh";
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] </title>
+    <!---->
+    <link rel="stylesheet" href="~/css/index.css" />
+    <script type="text/javascript" src="~/js/Chart.min.js"></script>
+    <script type="text/javascript" src="~/lib/chartjs-plugin-annotation-master/chartjs-plugin-annotation.min.js"></script>
+    <script type="text/javascript" src="~/js/site.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Pacifico|Roboto&display=swap" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+</head>
+<body>
+    <!--
+    <div class="head">
+        <div class="topnav">
+            <a asp-area="" asp-controller="Home" asp-action="Index">HOME</a>
+            <a class="active" asp-area="" asp-controller="Home" asp-action="Read_rec_data">EXPLORE</a>
+            <a asp-area="" asp-controller="Home" asp-action="HelloIndex">ABOUT US</a>
+            <a asp-area="" asp-controller="Signups" asp-action="Create">SIGN UP</a>
+        -->
+
+
+    <div class="bodyexplore">
+
+    </div>
+    </div>
+
+    <div>
+        <h1 class="home_about_dataset" align="center">Statistics on Deaths due to drugs</h1>
+    </div>
+
+    <br><br>
+    <div class="pie_div">
+        <canvas class="pie" id="pie-chart" width="800" height="200"></canvas>
+    </div>
+
+    <script>
+        new Chart(document.getElementById("pie-chart"), {
+            type: 'pie',
+            responsive: true,
+            data: {
+                labels: ["Home", "Hospital", "Convalescent Home", "Nursing Home", "Other"],
+                datasets: [{
+                    label: "Number of Entries in the Dataset",
+                    backgroundColor: ["#FAEBD7",
+                        "#DCDCDC",
+                        "#E9967A",
+                        "#ccff33",
+                        "#9ACD32"],
+                    borderColor: [
+                        "#E9DAC6",
+                        "#CBCBCB",
+                        "#D88569",
+                        "#E4CDA2",
+                        "#89BC21"
+                    ],
+                    data: [2477, 1427, 110, 111, 225]
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: ''
+
+                }
+            }
+        });
+
+    </script>
+    </div>
+</body>
+<script>
+    alertDbSave(@ViewBag.dbSuccessComp);
+</script>
